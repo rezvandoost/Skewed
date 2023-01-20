@@ -1,0 +1,181 @@
+@font-face {
+    font-family: 'aviny';
+    src: url('../fonts/aviny.eot');
+    src: url('../fonts/aviny.woff2') format('woff2'), url('../fonts/aviny.woff') format('woff'), url('../fonts/aviny.ttf') format('truetype');
+}
+    
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+    
+body {
+    font-family: Arial, Helvetica, sans-serif;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh; /* min */
+    background: #1f1f1f;
+}
+
+p, small {
+    color:#8f8f8f;
+}
+
+p {
+    font-size: 0.9rem;
+    line-height: 23px;
+}
+
+h1 {
+    /* color:#f11f1; give color in .skewed */
+     margin: 0;
+}
+
+a {
+    color:#fff;
+    text-decoration: none;
+}
+
+.skewed {
+    width: 45em;
+    /* height : we don't have height to adjust acording to the textcontent*/
+    color:#f1f1f1;
+    background: #111; /* bg contain .text and .image */
+    display: flex; /* put .image & .text near each other */
+    margin:2em 0;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.7);/* shadow for card */
+    /*align-items: center;
+    justify-content: center;*/
+}
+
+.text {
+    padding:1.5rem;
+    width: 50%;
+    display: flex;
+    align-items: flex-start;/* it's diffrent as usual*/
+    justify-content: space-evenly;/* it's diffrent as usual */
+    flex-direction: column;/* column */
+}
+
+.image {
+    width: 50%;
+    height: 17em;
+    position: relative; /* is Necessary */
+    overflow: hidden;/* necessary to control the ::after attribute */
+}
+
+.image::before {
+    content: '';
+    position: absolute;
+    top:50%;
+    left:-6.1em;
+    width: 40%;
+    height: 140%;
+    background: #111;/* as the bg color of .skewed */
+    transform: translateY(-50%) rotate(20deg);
+    -webkit-transform: translateY(-50%) rotate(20deg);
+    -moz-transform: translateY(-50%) rotate(20deg);
+    -ms-transform: translateY(-50%) rotate(20deg);
+    -o-transform: translateY(-50%) rotate(20deg);
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.7); /* shadow on photo */
+}
+
+.skewed-left .image::before {
+    transform: translateY(-50%) rotate(-20deg);/* the reverse side for 2nd card */
+    -webkit-transform: translateY(-50%) rotate(-20deg);
+    -moz-transform: translateY(-50%) rotate(-20deg);
+    -ms-transform: translateY(-50%) rotate(-20deg);
+    -o-transform: translateY(-50%) rotate(-20deg);
+    left: initial;/* as default */
+    right: -6.1em;
+}
+
+img {
+    /*object-fit:cover; doesn't work */
+    width: 140%; 
+    /* make photo smaller to have complete photo
+    another way to fit photo */
+}
+
+.last .image {
+    height:100%; /* to fit vertical space */
+}
+
+.last img {
+    /*position: relative;
+    it will remove ::before part
+    but
+    you can use this position in ::after mode
+    and
+    instead of transform, have right position*/
+    width:fit-content;
+    transform: translateX(-8rem);
+    -webkit-transform: translateX(-8rem);
+    -moz-transform: translateX(-8rem);
+    -ms-transform: translateX(-8rem);
+    -o-transform: translateX(-8rem);
+}
+
+.last .image::after {
+    content: '';
+    width: 50%;
+    height: 140%;
+    /* by width and height we have rectangle */
+    position: absolute;
+    top:50%;
+    left:-6.7em;
+    /* by top and left find suitable position for rectangle */
+    background: #111;/* as the bg color of .skewed */
+    transform: translateY(-50%) rotate(20deg);
+    -webkit-transform: translateY(-50%) rotate(20deg);
+    -moz-transform: translateY(-50%) rotate(20deg);
+    -ms-transform: translateY(-50%) rotate(20deg);
+    -o-transform: translateY(-50%) rotate(20deg);
+    /* by translate(-50%) move rectangle to middle position */
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.7); /* shadow on photo */
+}
+
+/*****************************************************/
+
+@media screen and (max-width:750px) {
+    .skewed {
+        /*display: block; for have vertical content, use this one*/
+        flex-direction: column; /* or this one */
+        width: 20em;
+    }
+
+    .image, .text {
+        width: 100%;
+    }
+
+    img {
+        width: 160%; /* to have bigger picture */
+    }
+
+    .skewed .image::before {
+        width: 120%;
+        height: 40%;
+        /*tohavehorizontalrectangle*/
+        top:-5em;
+        left: 50%;
+        transform:translateX(-50%) rotate(10deg) ;
+        -webkit-transform:translateX(-50%) rotate(10deg) ;
+        -moz-transform:translateX(-50%) rotate(10deg) ;
+        -ms-transform:translateX(-50%) rotate(10deg) ;
+        -o-transform:translateX(-50%) rotate(10deg) ;
+}
+
+.skewed-left .image::before {
+    transform: translateX(-50%) rotate(-10deg);
+    -webkit-transform: translateX(-50%) rotate(-10deg);
+    -moz-transform: translateX(-50%) rotate(-10deg);
+    -ms-transform: translateX(-50%) rotate(-10deg);
+    -o-transform: translateX(-50%) rotate(-10deg);
+    top:initial;
+    bottom: -5em;
+}
+    
+}
